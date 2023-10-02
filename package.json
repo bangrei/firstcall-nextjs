@@ -1,0 +1,31 @@
+{
+  "name": "firstcall-qa",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "appwrite": "^13.0.0",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "zustand": "^4.4.1"
+  },
+  "devDependencies": {
+    "typescript": "latest",
+    "@types/react": "latest",
+    "@types/node": "latest",
+    "@types/react-dom": "latest",
+    "autoprefixer": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest"
+  }
+}
