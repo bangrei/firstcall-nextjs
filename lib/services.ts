@@ -1,10 +1,16 @@
 import { Query, databases } from "@/appwrite";
 
 export const getUsersFromDB = async () => {
+  // const limit = 5;
+  // const offset = 0;
   const data = await databases.listDocuments(
     process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
     process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID!,
-    [Query.orderAsc("username")]
+    [
+      Query.orderAsc("username"),
+      // Query.limit(limit),
+      // Query.offset(offset)
+    ]
   );
   data.documents.sort((a, b) => {
     return b.$createdAt.localeCompare(a.$createdAt);
@@ -28,13 +34,22 @@ export const getUsersFromDB = async () => {
 };
 
 export const createNewUser = async (user: any) => {
-  const res = await databases.createDocument(
-    process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
-    process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID!,
-    "",
-    user
-  );
-  return res;
+  try {
+    const res = await databases.createDocument(
+      process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
+      process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID!,
+      "",
+      user
+    );
+    return res;
+  } catch (error) {
+    console.log(error);
+    return {
+      error: true,
+      message: error,
+      $id: null,
+    };
+  }
 };
 
 export const updateUserById = async (user: User) => {
@@ -46,7 +61,7 @@ export const updateUserById = async (user: User) => {
   await databases.updateDocument(
     process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
     process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID!,
-    user.id,
+    user.id || "",
     params
   );
 };

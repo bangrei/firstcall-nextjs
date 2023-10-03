@@ -71,6 +71,9 @@ function Modal() {
 
     if (!id) {
       const res = await createNewUser(params);
+      if (res.error) {
+        return _setAlert("Alert", res.message.toString());
+      }
       const user: User = {
         ...params,
         id: res.$id,

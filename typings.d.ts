@@ -1,5 +1,5 @@
 interface User {
-  id: string;
+  id: string | null;
   username: string;
   firstname: string;
   lastname: string;
